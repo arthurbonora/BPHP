@@ -45,6 +45,7 @@ v 3	- Inserida a função Bmodal, modal dependente do bootstrap css e js
 	- Retirada a função Bdeskoucel
 	- Incluída a função Bhash
 	- Não há mais versão minimal
+v 3.1   - Inserida a função Bfiltrogramatical
 
 
 
