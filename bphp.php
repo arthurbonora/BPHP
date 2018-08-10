@@ -1,8 +1,8 @@
 <?php
 /* =====================================================================
    BPHP 3 - Biblioteca PHP
-   Site oficial: sourceforge.net/projects/bphp/
-   As coletaneas de codigos terão seus creditos expressamente publicados 
+   Site oficial: https://github.com/arthurbonora/BPHP/
+   As coletaneas de codigos terÃ£o seus creditos expressamente publicados 
 ========================================================================*/
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
@@ -14,7 +14,7 @@ function Bconfirm ($msg) {
 }
 function Bcontdiasuteis($datainicial,$datafinal=null){
 	/**
-	* Calcula a quantidade de dias úteis entre duas datas (sem contar feriados)
+	* Calcula a quantidade de dias Ãºteis entre duas datas (sem contar feriados)
 	* @author Marcos Regis
 	* @param String $datainicial
 	* @param String $datafinal=null
@@ -29,11 +29,11 @@ function Bcontdiasuteis($datainicial,$datafinal=null){
 		$diai = $segundos_datainicial+($i*3600*24);
 		$w = date('w',$diai);
 		if ($w==0){
-			//echo date('d/m/Y',$diai)." é Domingo<br />";
+			//echo date('d/m/Y',$diai)." Ã© Domingo<br />";
 		}elseif($w==6){
-			//echo date('d/m/Y',$diai)." é Sábado<br />";
+			//echo date('d/m/Y',$diai)." Ã© SÃ¡bado<br />";
 		}else{
-			//echo date('d/m/Y',$diai)." é dia útil<br />";
+			//echo date('d/m/Y',$diai)." Ã© dia Ãºtil<br />";
 			$uteis++;
 		}
 	}
@@ -46,8 +46,8 @@ function databr2datamysql($databr) {
 }
 function Bdataporextenso () {
 		//por Davidson Bruno codigofonte.uol.com.br
-		$meses = array (1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
-		$diasdasemana = array (1 => "Segunda-Feira",2 => "Terça-Feira",3 => "Quarta-Feira",4 => "Quinta-Feira",5 => "Sexta-Feira",6 => "Sábado",0 => "Domingo");
+		$meses = array (1 => "Janeiro", 2 => "Fevereiro", 3 => "MarÃ§o", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
+		$diasdasemana = array (1 => "Segunda-Feira",2 => "TerÃ§a-Feira",3 => "Quarta-Feira",4 => "Quinta-Feira",5 => "Sexta-Feira",6 => "SÃ¡bado",0 => "Domingo");
 		$hoje = getdate();
 		$dia = $hoje["mday"];
 		$mes = $hoje["mon"];
@@ -127,7 +127,7 @@ function Blinkvoltar() {
 }
 function Blog ($erro, $texto){
 	$arq = fopen ('log.log','rw+');
-	fwrite ($arq,"[".date("r")."] Info: $erro \n Descrição: $texto \n ---------");
+	fwrite ($arq,"[".date("r")."] Info: $erro \n DescriÃ§Ã£o: $texto \n ---------");
 	fclose ($arq);
 }
 function Bmostraerros () {
