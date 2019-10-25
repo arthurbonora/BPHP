@@ -48,6 +48,7 @@ v 3	- Inserida a função Bmodal, modal dependente do bootstrap css e js
 v 3.1   - Incluido a função Bfiltrogramatical
  	- Alterado oficialmente para o github
 v 3.2   - Incluido o caractere ', na função Bseg() como um caracter de segurança.
+v 3.2.1 - Inserido a inicial B na função Bdatabr2datamysql()
 
 
 

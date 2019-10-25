@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 3 - Biblioteca PHP
+   BPHP 3.2.1 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
    As coletaneas de codigos terão seus creditos expressamente publicados 
 ========================================================================*/
@@ -39,7 +39,7 @@ function Bcontdiasuteis($datainicial,$datafinal=null){
 	}
 	return $uteis;
 }
-function databr2datamysql($databr) {
+function Bdatabr2datamysql($databr) {
 	$array = explode ('/',$databr);
 	$datamysql = $array[2]."-".$array[1]."-".$array[0];
 	return $datamysql;
