@@ -1,55 +1,52 @@
-v 0.3.1 - Inicio das notas de versões
+v 0.3.1 - Inicio das notas de versÃµes
 v 0.3.1 - adicionado complemento (Backup)
-v 0.4   - adicionado a função Balerta para criação de confirmações em javascript
-v 0.5   - adicionado função Bembedyoutube para adicionar videos do youtube do codigo embed
-v 0.5.1 - adicionado função Brand
-v 0.5.2 - retirado a função btwitter, pois o twitter não da mais suporte a autenticação básica
-v 0.6   - adicionado a função Bcontdiasuteis para contar os dias uteis entre duas datas
-v 0.7   - adicionado a função e complemento Blog (que cria logs no arquivo log.log)
-v 0.8   - inciado a inclusão de classes e adicionado a classe CBupload
-	- o framework bphp passa a ser considerado todo conjunto de arquivos e não apenas o bphp.php
-	- incluido documentação 1.0
+v 0.4   - adicionado a funÃ§Ã£o Balerta para criaï¿½ï¿½o de confirmaï¿½ï¿½es em javascript
+v 0.5   - adicionado funÃ§Ã£o Bembedyoutube para adicionar videos do youtube do codigo embed
+v 0.5.1 - adicionado funÃ§Ã£o Brand
+v 0.5.2 - retirado a funÃ§Ã£o btwitter, pois o twitter nï¿½o da mais suporte a autenticaï¿½ï¿½o bï¿½sica
+v 0.6   - adicionado a funÃ§Ã£o Bcontdiasuteis para contar os dias uteis entre duas datas
+v 0.7   - adicionado a funÃ§Ã£o e complemento Blog (que cria logs no arquivo log.log)
+v 0.8   - inciado a inclusï¿½o de classes e adicionado a classe CBupload
+	- o framework bphp passa a ser considerado todo conjunto de arquivos e nï¿½o apenas o bphp.php
+	- incluido documentaï¿½ï¿½o 1.0
 v 0.9   - incluido redirecionametno em javascript
-	- corrigido função Bredirecionamento301
-	- retiradas as funções Binc e Bincall
-	- inserida a função Bseg
-	- inserida a função Bpopup
+	- corrigido funÃ§Ã£o Bredirecionamento301
+	- retiradas as funÃ§Ã£es Binc e Bincall
+	- inserida a funÃ§Ã£o Bseg
+	- inserida a funÃ§Ã£o Bpopup
 	- retirada a classe CBupload
-	- retirada função Binc
-	- retirada a funcção bincall
+	- retirada funÃ§Ã£o Binc
+	- retirada a funcÃ§Ã£o bincall
 	- integrado a classe PHPMailler
-	- Criado a função Bmail
-v 0.9.1 - alterações não concretizadas
-v 0.9.2 - inserida a função Btoken
-	- descrito o controle de versões na documentação
-v 0.9.3 - inserida a função Bpeganumeros
-	- inserida a função Bgeracodbarras
+	- Criado a funÃ§Ã£o Bmail
+v 0.9.1 - alteraÃ§Ã£es nï¿½o concretizadas
+v 0.9.2 - inserida a funï¿½ï¿½o Btoken
+	- descrito o controle de versï¿½es na documentaï¿½ï¿½o
+v 0.9.3 - inserida a funï¿½ï¿½o Bpeganumeros
+	- inserida a funÃ§Ã£o Bgeracodbarras
 	- inserido complemento de editor (usando Tinymce 4.0.1)
-v 0.9.4 - atualizado versão do tinymce para 4.0.6
-	- inserida a função Bheadersmail
-v 0.10  - inserida a função Bfavicon
-v 1.0   - inserida a função Bsubmit
-	- inserida a função Bdeskoucel
-	- retirada a função Bpaginacao
-	- Incluida a versão minimal
-v 2     - retirada função Bembedyoutube
-	- atualizado o editor para mais opções (Tinymce 4.1.6)
+v 0.9.4 - atualizado versï¿½o do tinymce para 4.0.6
+	- inserida a funÃ§Ã£o Bheadersmail
+v 0.10  - inserida a funï¿½ï¿½o Bfavicon
+v 1.0   - inserida a funï¿½ï¿½o Bsubmit
+	- inserida a funÃ§Ã£o Bdeskoucel
+	- retirada a funÃ§Ã£o Bpaginacao
+	- Incluida a versÃ§Ã£o minimal
+v 2     - retirada funÃ§Ã£o Bembedyoutube
+	- atualizado o editor para mais opï¿½ï¿½es (Tinymce 4.1.6)
 	- exluido a funcao Bmail
-	- adicionado a função Bmostraerros
-v 2.0.1 - Alterado a função Balertaconfirmacao para Bconfirm, agora sem página de destino
-v 2.1	- Adicionado a função Bverificaurl
-v 2.3   - Adicionado a função Blinkvoltar
-v 2.4	- Retirada as funções: Bconnect, Bredirecionamento301, Bredirecionamentohtml.
-v 2.4.1 - Alterada a função Blinkvoltar incluindo novas opções.
-v 3	- Inserida a função Bmodal, modal dependente do bootstrap css e js
-	- Retirada a função Bdeskoucel
-	- Incluída a função Bhash
-	- Não há mais versão minimal
-v 3.1   - Incluido a função Bfiltrogramatical
+	- adicionado a funÃ§Ã£o Bmostraerros
+v 2.0.1 - Alterado a funÃ§Ã£o Balertaconfirmacao para Bconfirm, agora sem pï¿½gina de destino
+v 2.1	- Adicionado a funÃ§Ã£o Bverificaurl
+v 2.3   - Adicionado a funÃ§Ã£o Blinkvoltar
+v 2.4	- Retirada as funï¿½ï¿½es: Bconnect, Bredirecionamento301, Bredirecionamentohtml.
+v 2.4.1 - Alterada a funï¿½ï¿½o Blinkvoltar incluindo novas opï¿½ï¿½es.
+v 3	- Inserida a funÃ§Ã£o Bmodal, modal dependente do bootstrap css e js
+	- Retirada a funÃ§Ã£o Bdeskoucel
+	- Incluï¿½da a funÃ§Ã£o Bhash
+	- Nï¿½o hï¿½ mais versï¿½o minimal
+v 3.1   - Incluido a funÃ§Ã£o Bfiltrogramatical
  	- Alterado oficialmente para o github
-v 3.2   - Incluido o caractere ', na função Bseg() como um caracter de segurança.
-v 3.2.1 - Inserido a inicial B na função Bdatabr2datamysql()
-
-
-
-
+v 3.2   - Incluido o caractere ', na funÃ§Ã£o Bseg() como um caracter de seguranï¿½a.
+v 3.2.1 - Inserido a inicial B na funÃ§Ã£o Bdatabr2datamysql()
+v 3.2.2 - ExcluÃ­do a funÃ§Ã£o Bmodal()

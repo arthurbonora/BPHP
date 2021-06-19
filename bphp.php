@@ -1,8 +1,8 @@
 <?php
 /* =====================================================================
-   BPHP 3.2.1 - Biblioteca PHP
+   BPHP 3.2.2 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
-   As coletaneas de codigos terão seus creditos expressamente publicados 
+   As coletaneas de codigos terão seus creditos expressamente publicados
 ========================================================================*/
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
@@ -10,7 +10,7 @@ function Balerta ($msg) {
 function Bconfirm ($msg) {
 	?>
     <script language="javascript"> confirm ('<? echo "$msg"; ?>') </script>
-	<?php 
+	<?php
 }
 function Bcontdiasuteis($datainicial,$datafinal=null){
 	/**
@@ -58,8 +58,8 @@ function Bdataporextenso () {
 		return "$nomediadasemana, $dia de $nomemes de $ano";
 	}
 function Beditor () {
-?> 
-	<script type="text/javascript" src="bphp/editor/tinymce.min.js"></script> 
+?>
+	<script type="text/javascript" src="bphp/editor/tinymce.min.js"></script>
     <script type="text/javascript">
 	tinyMCE.init({
       selector: "textarea#beditor",
@@ -83,10 +83,10 @@ function Beditor () {
 }
 function Bfavicon ($patchimg) {
 	echo "<link href='".$patchimg."' rel='icon' type='image/x-icon' />";
-}	
+}
 function Bgeracodbarras ($string) {
 ?>
-    <script type="text/javascript" src="bytescoutbarcode128_1.00.07.js"></script> 
+    <script type="text/javascript" src="bytescoutbarcode128_1.00.07.js"></script>
     <img id="barcodeImage" style="border:0px;"/>
 	</p>
     <script type="text/javascript">
@@ -135,47 +135,22 @@ function Bmostraerros () {
 	ini_set("display_startup_erros",1);
 	error_reporting(E_ALL);
 }
-function Bmodal ($msg) {
-	?>	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-   			<div class="modal-content">
-     			<div class="modal-header">
-       				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       				<h4 class="modal-title" id="myModalLabel">Alerta</h4>
-     			</div>
-     			<div class="modal-body">
-       				<?php echo $msg; ?>
-     			</div>
-     			<div class="modal-footer">
-       				<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-       			</div>
-   			</div>
- 		</div>
-	</div>
-	<script>
-		$(document).ready(function() {
-   			$('#myModal').modal('show');
-		});
-	</script>
-	<?php
-}
 function Bpeganumeros($str) {
         return preg_replace("/[^0-9]/", "", $str);
 }
-function Bpopup ($pagina,$titulo,$comprimento,$largura) { 
+function Bpopup ($pagina,$titulo,$comprimento,$largura) {
 	echo("<script language='JavaScript'>
 	var width = " . $largura . ";
 	var height = " . $comprimento . ";
-	var titulo = " . $titulo . ";		
+	var titulo = " . $titulo . ";
 	var left = 50;
 	var top = 50;
 	URL = '" . $pagina . "';
 	window.open(URL, 'titulo', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=no, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
-	</script>");     
+	</script>");
 }
 function Brand ($item1,$item2,$item3,$item4,$item5) {
-	$array = array('$item1','$item2','$item3','$item4','$item5');       
+	$array = array('$item1','$item2','$item3','$item4','$item5');
 	return $array[rand(0, 5)];
 }
 function Bredirecionamentojs($link){
@@ -207,7 +182,7 @@ function Btoken() {
 	$token = "btoken".$rand1.$rand2.$rand3.$rand4.$rand5.$rand6.$rand7.$rand8.$rand9.$rand10;
 	return $token;
 }
-function Bverificaurl( $link ) {        
+function Bverificaurl( $link ) {
 	$partes_url = @parse_url( $link );
     if (empty( $partes_url["host"])) return( false );
     if (!empty( $partes_url["path"])) {
@@ -229,14 +204,14 @@ function Bverificaurl( $link ) {
     } else {
         fwrite ($socket, "HEAD ".$path_documento." HTTP/1.0\r\nHost: $host\r\n\r\n");
         $http_response = fgets( $socket, 22 );
-        $pos = null;       
+        $pos = null;
 	    $pos = strpos($http_response, "200 OK");
         if ( !empty($pos) ) {
-            fclose( $socket );       
+            fclose( $socket );
             return(true);
         } else {
         	//echo "HTTP-Response: $http_response<br>";
             return(false);
         }
     }
-} 
+}
