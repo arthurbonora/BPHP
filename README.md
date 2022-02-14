@@ -1,5 +1,5 @@
 ====================
-BPHP versão atual 3.2.1
+BPHP versão atual 3.2.2
 ====================
 Desenvolvido por Arthur Bonora
 www.arthurbonora.com.br
