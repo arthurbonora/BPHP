@@ -57,20 +57,24 @@ function Bdataporextenso () {
 		$nomediadasemana = $diasdasemana[$diadasemana];
 		return "$nomediadasemana, $dia de $nomemes de $ano";
 	}
-function Beditor () {
+function BeditorHEAD () {
 ?>
 	 <script src="https://cdn.tiny.cloud/1/39jusjnse4p6r20j24vjugseb52gqotyfqmm9gkcgru1fuep/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-	 <script>
-	tinymce.init({
-		selector: 'beditor',
-		plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-		toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
-		toolbar_mode: 'floating',
-		tinycomments_mode: 'embedded',
-		tinycomments_author: 'BPHP 3.3',
-	});
-</script>
 <?php
+}
+function BeditorBODY () {
+	?>
+	<script>
+ 	tinymce.init({
+	 	selector: 'beditor',
+	 	plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+	 	toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+	 	toolbar_mode: 'floating',
+	 	tinycomments_mode: 'embedded',
+	 	tinycomments_author: 'BPHP 3.3',
+ 	});
+</script>
+	<?php
 }
 function Bfavicon ($patchimg) {
 	echo "<link href='".$patchimg."' rel='icon' type='image/x-icon' />";

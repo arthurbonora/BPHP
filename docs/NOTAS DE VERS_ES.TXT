@@ -52,4 +52,5 @@ v 3.2.1 - Inserido a inicial B na função Bdatabr2datamysql()
 v 3.2.2 - Excluído a função Bmodal()
 v 3.3 - Atualizado a versão do script tinyMCE
 			- TiniMCE passa a ser utilizada via CDN
+			- Alterada forma de utilização do Beditor para BeditorHEAD() e BeditorBODY()
 			- Retirada a função Bpopup()
