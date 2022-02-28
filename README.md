@@ -1,8 +1,8 @@
 ====================
-BPHP versão atual 3.2.2
+BPHP versão atual 3.3
 ====================
-Desenvolvido por Arthur Bonora
-www.arthurbonora.com.br
+Desenvolvido por Arthur Bonora para Bonora Soluções Web
+www.bonora.com.br
 
 Para iniciar, adicione o require no início de seu projeto:
 require 'bphp/bphp.php';

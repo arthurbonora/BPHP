@@ -1,9 +1,9 @@
 v 0.3.1 - Inicio das notas de versões
 v 0.3.1 - adicionado complemento (Backup)
-v 0.4   - adicionado a função Balerta para cria��o de confirma��es em javascript
+v 0.4   - adicionado a função Balerta para criação de confirmações em javascript
 v 0.5   - adicionado função Bembedyoutube para adicionar videos do youtube do codigo embed
 v 0.5.1 - adicionado função Brand
-v 0.5.2 - retirado a função btwitter, pois o twitter n�o da mais suporte a autentica��o b�sica
+v 0.5.2 - retirado a função btwitter, pois o twitter não da mais suporte a autenticação básica
 v 0.6   - adicionado a função Bcontdiasuteis para contar os dias uteis entre duas datas
 v 0.7   - adicionado a função e complemento Blog (que cria logs no arquivo log.log)
 v 0.8   - inciado a inclus�o de classes e adicionado a classe CBupload
@@ -27,8 +27,8 @@ v 0.9.3 - inserida a fun��o Bpeganumeros
 	- inserido complemento de editor (usando Tinymce 4.0.1)
 v 0.9.4 - atualizado vers�o do tinymce para 4.0.6
 	- inserida a função Bheadersmail
-v 0.10  - inserida a fun��o Bfavicon
-v 1.0   - inserida a fun��o Bsubmit
+v 0.10  - inserida a função Bfavicon
+v 1.0   - inserida a função Bsubmit
 	- inserida a função Bdeskoucel
 	- retirada a função Bpaginacao
 	- Incluida a versção minimal
@@ -39,14 +39,17 @@ v 2     - retirada função Bembedyoutube
 v 2.0.1 - Alterado a função Balertaconfirmacao para Bconfirm, agora sem p�gina de destino
 v 2.1	- Adicionado a função Bverificaurl
 v 2.3   - Adicionado a função Blinkvoltar
-v 2.4	- Retirada as fun��es: Bconnect, Bredirecionamento301, Bredirecionamentohtml.
-v 2.4.1 - Alterada a fun��o Blinkvoltar incluindo novas op��es.
+v 2.4	- Retirada as funções: Bconnect, Bredirecionamento301, Bredirecionamentohtml.
+v 2.4.1 - Alterada a função Blinkvoltar incluindo novas opções.
 v 3	- Inserida a função Bmodal, modal dependente do bootstrap css e js
 	- Retirada a função Bdeskoucel
-	- Inclu�da a função Bhash
-	- N�o h� mais vers�o minimal
+	- Incluída a função Bhash
+	- Não há mais versão minimal
 v 3.1   - Incluido a função Bfiltrogramatical
  	- Alterado oficialmente para o github
 v 3.2   - Incluido o caractere ', na função Bseg() como um caracter de seguran�a.
 v 3.2.1 - Inserido a inicial B na função Bdatabr2datamysql()
 v 3.2.2 - Excluído a função Bmodal()
+v 3.3 - Atualizado a versão do script tinyMCE
+			- TiniMCE passa a ser utilizada via CDN
+			- Retirada a função Bpopup()

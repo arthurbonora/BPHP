@@ -59,26 +59,17 @@ function Bdataporextenso () {
 	}
 function Beditor () {
 ?>
-	<script type="text/javascript" src="bphp/editor/tinymce.min.js"></script>
-    <script type="text/javascript">
-	tinyMCE.init({
-      selector: "textarea#beditor",
-	  theme: "modern",
-   	  plugins: [
-      	"advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table contextmenu directionality",
-        "emoticons template paste textcolor colorpicker textpattern"
-      ],
-      toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-      toolbar2: "print preview media | forecolor backcolor emoticons",
-      image_advtab: true,
-      templates: [
-        {title: 'Test template 1', content: 'Test 1'},
-        {title: 'Test template 2', content: 'Test 2'}
-      ]
-    });
-	</script>
+	 <script src="https://cdn.tiny.cloud/1/39jusjnse4p6r20j24vjugseb52gqotyfqmm9gkcgru1fuep/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	 <script>
+	tinymce.init({
+		selector: 'beditor',
+		plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+		toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+		toolbar_mode: 'floating',
+		tinycomments_mode: 'embedded',
+		tinycomments_author: 'BPHP 3.3',
+	});
+</script>
 <?php
 }
 function Bfavicon ($patchimg) {
@@ -137,17 +128,6 @@ function Bmostraerros () {
 }
 function Bpeganumeros($str) {
         return preg_replace("/[^0-9]/", "", $str);
-}
-function Bpopup ($pagina,$titulo,$comprimento,$largura) {
-	echo("<script language='JavaScript'>
-	var width = " . $largura . ";
-	var height = " . $comprimento . ";
-	var titulo = " . $titulo . ";
-	var left = 50;
-	var top = 50;
-	URL = '" . $pagina . "';
-	window.open(URL, 'titulo', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=no, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
-	</script>");
 }
 function Brand ($item1,$item2,$item3,$item4,$item5) {
 	$array = array('$item1','$item2','$item3','$item4','$item5');
