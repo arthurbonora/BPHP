@@ -54,3 +54,5 @@ v 3.3 - Atualizado a versão do script tinyMCE
 			- TiniMCE passa a ser utilizada via CDN
 			- Alterada forma de utilização do Beditor para BeditorHEAD() e BeditorBODY()
 			- Retirada a função Bpopup()
+v 3.3.1 - Inserida a função Bvalidacnpj
+		- Inserida a função Bvalidacpf
