@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 3.2.2 - Biblioteca PHP
+   BPHP 3.3.1 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
    As coletaneas de codigos terão seus creditos expressamente publicados
 ========================================================================*/
