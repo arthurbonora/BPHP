@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 3.2.2 - Biblioteca PHP
+   BPHP 3.3.1 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
    As coletaneas de codigos terão seus creditos expressamente publicados
 ========================================================================*/
@@ -173,7 +173,7 @@ function Bvalidacnpj($cnpj)
 	if (strlen($cnpj) != 14)
 		return false;
 	if (preg_match('/(\d)\1{13}/', $cnpj))
-		return false;	
+		return false;
     for ($t = 12; $t < 14; $t++) {
         for ($d = 0, $m = ($t - 7), $i = 0; $i < $t; $i++) {
             $d += $cnpj[$i] * $m;
