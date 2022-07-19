@@ -1,7 +1,14 @@
 {
     "name": "arthurbonora/bphp",
-    "description": "Biblioteca PHP de funções",
-    "require": {
-        "php": ">=7.4"
-    }
+    "description": "Biblioteca de funções BPHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arthur Bonora - Bonora Soluções Web",
+            "email": "arthur@bonora.com.br"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
 }
