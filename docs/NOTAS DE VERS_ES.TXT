@@ -56,3 +56,4 @@ v 3.3 - Atualizado a versão do script tinyMCE
 			- Retirada a função Bpopup()
 v 3.3.1 - Inserida a função Bvalidacnpj
 		- Inserida a função Bvalidacpf
+v 3.3.2 - Preparação para v4 com a utilização do composer.

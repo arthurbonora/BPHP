@@ -1,0 +1,7 @@
+{
+    "name": "arthurbonora/bphp",
+    "description": "Biblioteca PHP de funções",
+    "require": {
+        "php": ">=7.4"
+    }
+}
