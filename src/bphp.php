@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 3.3.2 - Biblioteca PHP
+   BPHP 3.3.3 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
    As coletaneas de codigos terão seus creditos expressamente publicados
 ========================================================================*/
@@ -148,6 +148,10 @@ function Bseg ($string) {
 	$caracteres = array(";","\\","''","``","'");
 	$string_seg = str_replace ($caracteres, "B", $string);
 	return $string_seg;
+}
+function Bsetpreco ($valor) {
+	$retur_preco = str_replace(',','.', $valor);
+	return $retur_preco;
 }
 function Bsubmit ($form) {
 	echo "<script type='text/javascript'>document.".$form.".submit();</script>";

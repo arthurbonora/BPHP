@@ -1,5 +1,5 @@
 
-BPHP versão atual 3.3.2
+BPHP versão atual 3.3.3
 
 Desenvolvido por Arthur Bonora para Bonora Soluções Web
 www.bonora.com.br
