@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 3.3.3 - Biblioteca PHP
+   BPHP 3.3.4 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
    As coletaneas de codigos terão seus creditos expressamente publicados
 ========================================================================*/
@@ -134,7 +134,7 @@ function Bpeganumeros($str) {
         return preg_replace("/[^0-9]/", "", $str);
 }
 function Brand ($item1,$item2,$item3,$item4,$item5) {
-	$array = array('$item1','$item2','$item3','$item4','$item5');
+	$array = array($item1, $item2, $item3, $item4, $item5);
 	return $array[rand(0, 5)];
 }
 function Bredirecionamentojs($link){
