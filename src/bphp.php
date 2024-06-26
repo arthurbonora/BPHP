@@ -1,9 +1,64 @@
 <?php
 /* =====================================================================
-   BPHP 3.3.4 - Biblioteca PHP
+   BPHP 4 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
-   As coletaneas de codigos terão seus creditos expressamente publicados
 ========================================================================*/
+require '../config.php';
+$connection = new mysqli($host, $usuario, $senha, $banco);
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+define('CONN', $connection);
+function Bdebug($data) {
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
+}
+function Bdelete($table, $conditions) {
+    $conditionList = [];
+    foreach ($conditions as $column => $value) {
+    $conditionList[] = "$column = :$column";    }
+    $conditionClause = implode(" AND ", $conditionList);
+    $query = "DELETE FROM $table WHERE $conditionClause";
+    $stmt = CONN->prepare($query);
+    return $stmt->execute($conditions);
+}
+function Binsert($table, $data) {
+    $columns = implode(", ", array_keys($data));
+    $placeholders = ":" . implode(", :", array_keys($data));
+    $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+    $stmt = CONN->prepare($query);
+    return $stmt->execute($data);
+}
+function Bselect($table, $conditions = [], $columns = ['*']) {
+    $columnsList = implode(", ", $columns);
+    $query = "SELECT $columnsList FROM $table";
+    if (!empty($conditions)) {
+        $conditionList = [];
+        foreach ($conditions as $column => $value) {
+            $conditionList[] = "$column = :$column";
+        }
+        $query .= " WHERE " . implode(" AND ", $conditionList);
+    }
+    $stmt = CONN->prepare($query);
+    $stmt->execute($conditions);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function Bupdate($table, $data, $conditions) {
+    $setList = [];
+    foreach ($data as $column => $value) {
+        $setList[] = "$column = :$column";
+    }
+    $setClause = implode(", ", $setList);
+    $conditionList = [];
+    foreach ($conditions as $column => $value) {
+        $conditionList[] = "$column = :$column";
+    }
+    $conditionClause = implode(" AND ", $conditionList);
+    $query = "UPDATE $table SET $setClause WHERE $conditionClause";
+    $stmt = CONN->prepare($query);
+    return $stmt->execute(array_merge($data, $conditions));
+}
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
 }
