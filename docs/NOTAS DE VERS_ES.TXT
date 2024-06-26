@@ -60,6 +60,15 @@ v 3.3.2 - Preparação para v4 com a utilização do composer.
 v 3.3.3 - Incluida a função Bsetpreco()
 v 3.3.4 - Corrigida a função Brand
 v 4     - Inserido o sistema CRUD para interação com Mysql / MariaDB
+	- Voltado ao sistema antigo do Beditor
+	- Retirado Bfavicon
+	- Retirado Bheadersmail
+	- Retirado sistema de Log
+	- Retirado Bsubmit
+	- Atualizada função Bvalidacnpj
+	- Atualizada função BvalidaCPF
+	- Atualizada função Bcontdiasuteis
+	- Retirado a função Bdataporextenso
 
 
  

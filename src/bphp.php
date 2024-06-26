@@ -67,72 +67,48 @@ function Bconfirm ($msg) {
     <script language="javascript"> confirm ('<? echo "$msg"; ?>') </script>
 	<?php
 }
-function Bcontdiasuteis($datainicial,$datafinal=null){
-	/**
-	* Calcula a quantidade de dias úteis entre duas datas (sem contar feriados)
-	* @author Marcos Regis
-	* @param String $datainicial
-	* @param String $datafinal=null
-	*/
-	if (!isset($datainicial)) return false;
-	if (!isset($datafinal)) $datafinal=time();
-	$segundos_datainicial = strtotime(preg_replace("#(\d{2})/(\d{2})/(\d{4})#","$3/$2/$1",$datainicial));
-	$segundos_datafinal = strtotime(preg_replace("#(\d{2})/(\d{2})/(\d{4})#","$3/$2/$1",$datafinal));
-	$dias = abs(floor(floor(($segundos_datafinal-$segundos_datainicial)/3600)/24 ) );
-	$uteis=0;
-	for($i=1;$i<=$dias;$i++){
-		$diai = $segundos_datainicial+($i*3600*24);
-		$w = date('w',$diai);
-		if ($w==0){
-			//echo date('d/m/Y',$diai)." é Domingo<br />";
-		}elseif($w==6){
-			//echo date('d/m/Y',$diai)." é Sábado<br />";
-		}else{
-			//echo date('d/m/Y',$diai)." é dia útil<br />";
-			$uteis++;
-		}
-	}
-	return $uteis;
+function Bcontdiasuteis($timestampInicial, $timestampFinal = null, $feriados = []) {
+    if (!isset($timestampInicial)) return false;
+	if (!isset($timestampFinal)) $timestampFinal = time();
+    $dias = abs(($timestampFinal - $timestampInicial) / 86400);
+    $uteis = 0;
+    for ($i = 0; $i <= $dias; $i++) {
+        $diaAtual = $timestampInicial + ($i * 86400);
+        $diaSemana = date('w', $diaAtual);
+        if ($diaSemana != 0 && $diaSemana != 6 && !in_array($diaAtual, $feriados)) {
+            $uteis++;
+        }
+    }
+    return $uteis;
 }
 function Bdatabr2datamysql($databr) {
 	$array = explode ('/',$databr);
 	$datamysql = $array[2]."-".$array[1]."-".$array[0];
 	return $datamysql;
 }
-function Bdataporextenso () {
-		//por Davidson Bruno codigofonte.uol.com.br
-		$meses = array (1 => "Janeiro", 2 => "Fevereiro", 3 => "Março", 4 => "Abril", 5 => "Maio", 6 => "Junho", 7 => "Julho", 8 => "Agosto", 9 => "Setembro", 10 => "Outubro", 11 => "Novembro", 12 => "Dezembro");
-		$diasdasemana = array (1 => "Segunda-Feira",2 => "Terça-Feira",3 => "Quarta-Feira",4 => "Quinta-Feira",5 => "Sexta-Feira",6 => "Sábado",0 => "Domingo");
-		$hoje = getdate();
-		$dia = $hoje["mday"];
-		$mes = $hoje["mon"];
-		$nomemes = $meses[$mes];
-		$ano = $hoje["year"];
-		$diadasemana = $hoje["wday"];
-		$nomediadasemana = $diasdasemana[$diadasemana];
-		return "$nomediadasemana, $dia de $nomemes de $ano";
-	}
-function BeditorHEAD () {
-?>
-	 <script src="https://cdn.tiny.cloud/1/39jusjnse4p6r20j24vjugseb52gqotyfqmm9gkcgru1fuep/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<?php
-}
-function BeditorBODY () {
-	?>
-	<script>
- 	tinymce.init({
-	 	selector: 'beditor',
-	 	plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-	 	toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
-	 	toolbar_mode: 'floating',
-	 	tinycomments_mode: 'embedded',
-	 	tinycomments_author: 'BPHP 3.3',
- 	});
-</script>
+function Beditor() {
+ 	?>
+	<script type="text/javascript" src="bphp/editor/tinymce.min.js"></script>
+	<script type="text/javascript">
+		tinyMCE.init({
+			selector: "textarea#beditor",
+			theme: "modern",
+			plugins: [
+				"advlist autolink lists link image charmap print preview hr anchor pagebreak",
+				"searchreplace wordcount visualblocks visualchars code fullscreen",
+				"insertdatetime media nonbreaking save table contextmenu directionality",
+				"emoticons template paste textcolor colorpicker textpattern"
+			],
+			toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+			toolbar2: "print preview media | forecolor backcolor emoticons",
+			image_advtab: true,
+			templates: [
+				{title: 'Test template 1', content: 'Test 1'},
+				{title: 'Test template 2', content: 'Test 2'}
+			]
+		});
+	</script>
 	<?php
-}
-function Bfavicon ($patchimg) {
-	echo "<link href='".$patchimg."' rel='icon' type='image/x-icon' />";
 }
 function Bgeracodbarras ($string) {
 ?>
@@ -160,13 +136,6 @@ function Bhash($string) {
 	$hash_	 = md5($hash__);
 	return $hash_;
 }
-function Bheadersmail ($email) {
-	$headers = "MIME-Version: 1.1\r\n";
-	$headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
-	$headers .= "From: ".$email."\r\n"; // remetente
-	$headers .= "Return-Path: ".$email."\r\n"; // return-path
-	return $headers;
-}
 function Blinkvoltar() {
 	$_SESSION['Blinkvoltar3'] = $_SESSION['Blinkvoltar2'];
 	$_SESSION['Blinkvoltar2'] = $_SESSION['Blinkvoltar'];
@@ -174,11 +143,6 @@ function Blinkvoltar() {
 	$hist_server = $_SERVER['SERVER_NAME'];
 	$hist_endereco = $_SERVER ['REQUEST_URI'];
 	$_SESSION['Blinkatual'] =  "http://" . $hist_server . $hist_endereco;
-}
-function Blog ($erro, $texto){
-	$arq = fopen ('log.log','rw+');
-	fwrite ($arq,"[".date("r")."] Info: $erro \n Descrição: $texto \n ---------");
-	fclose ($arq);
 }
 function Bmostraerros () {
 	ini_set("display_errors",1);
@@ -208,9 +172,6 @@ function Bsetpreco ($valor) {
 	$retur_preco = str_replace(',','.', $valor);
 	return $retur_preco;
 }
-function Bsubmit ($form) {
-	echo "<script type='text/javascript'>document.".$form.".submit();</script>";
-}
 function Btoken() {
 	$rand1 = rand (0,100);
 	$rand2 = rand (0,100);
@@ -225,77 +186,69 @@ function Btoken() {
 	$token = "btoken".$rand1.$rand2.$rand3.$rand4.$rand5.$rand6.$rand7.$rand8.$rand9.$rand10;
 	return $token;
 }
-function Bvalidacnpj($cnpj)
-//fonte: https://gist.github.com/guisehn/3276302
-{
-	$cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
-	if (strlen($cnpj) != 14)
-		return false;
-	if (preg_match('/(\d)\1{13}/', $cnpj))
-		return false;
-    for ($t = 12; $t < 14; $t++) {
-        for ($d = 0, $m = ($t - 7), $i = 0; $i < $t; $i++) {
-            $d += $cnpj[$i] * $m;
-            $m = ($m == 2 ? 9 : --$m);
-        }
-        $d = ((10 * $d) % 11) % 10;
-        if ($cnpj[$i] != $d) {
-            return false;
-        }
+function Bvalidacnpj($cnpj) {
+	$cnpj = preg_replace('/[^0-9]/', '', $cnpj);
+    if (strlen($cnpj) != 14) {
+        return false;
     }
-    return true;
+    if (preg_match('/(\d)\1{13}/', $cnpj)) {
+        return false;
+    }
+    $calcularDigito = function($base) {
+        $tamanho = strlen($base);
+        $soma = 0;
+        $pos = $tamanho - 7;
+        for ($i = $tamanho; $i >= 1; $i--) {
+            $soma += $base[$tamanho - $i] * $pos--;
+            if ($pos < 2) {
+                $pos = 9;
+            }
+        }
+        $resultado = $soma % 11;
+        return ($resultado < 2) ? 0 : 11 - $resultado;
+    };
+    $base = substr($cnpj, 0, 12);
+    $digito1 = $calcularDigito($base);
+    $digito2 = $calcularDigito($base . $digito1);
+    return $cnpj[12] == $digito1 && $cnpj[13] == $digito2;
 }
 function Bvalidacpf($cpf) {
-	//fonte: https://gist.github.com/rafael-neri/ab3e58803a08cb4def059fce4e3c0e40
-    $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
+    $cpf = preg_replace('/[^0-9]/', '', $cpf);
     if (strlen($cpf) != 11) {
         return false;
     }
     if (preg_match('/(\d)\1{10}/', $cpf)) {
         return false;
     }
-    for ($t = 9; $t < 11; $t++) {
-        for ($d = 0, $c = 0; $c < $t; $c++) {
-            $d += $cpf[$c] * (($t + 1) - $c);
+    $calcularDigito = function($base) {
+        $tamanho = strlen($base);
+        $soma = 0;
+        for ($i = 0; $i < $tamanho; $i++) {
+            $soma += $base[$i] * (($tamanho + 1) - $i);
         }
-        $d = ((10 * $d) % 11) % 10;
-        if ($cpf[$c] != $d) {
-            return false;
-        }
-    }
-    return true;
+        $resto = $soma % 11;
+        return ($resto < 2) ? 0 : 11 - $resto;
+    };
+    $digito1 = $calcularDigito(substr($cpf, 0, 9));
+    $digito2 = $calcularDigito(substr($cpf, 0, 9) . $digito1);
+    return $cpf[9] == $digito1 && $cpf[10] == $digito2;
 }
-
-function Bverificaurl( $link ) {
-	$partes_url = @parse_url( $link );
-    if (empty( $partes_url["host"])) return( false );
-    if (!empty( $partes_url["path"])) {
-        $path_documento = $partes_url["path"];
+function Bverificaurl($link) {
+    if (!filter_var($link, FILTER_VALIDATE_URL)) {
+        return false;
     }
-    else {
-        $path_documento = "/";
+    $ch = curl_init($link);
+    curl_setopt($ch, CURLOPT_NOBODY, true); 
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10); 
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); 
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+    $response = curl_exec($ch);
+    if (curl_errno($ch)) {
+        curl_close($ch);
+        return false;
     }
-    if (!empty( $partes_url["query"])) {
-        $path_documento .= "?" . $partes_url["query"];
-    }
-    $host = $partes_url["host"];
-    $porta = $partes_url["port"];
-    // faz um (HTTP-)GET $path_documento em $host";
-    if (empty($porta)) $porta = "80";
-    $socket = @fsockopen( $host, $porta, $errno, $errstr, 30 );
-    if (!$socket) {
-        return(false);
-    } else {
-        fwrite ($socket, "HEAD ".$path_documento." HTTP/1.0\r\nHost: $host\r\n\r\n");
-        $http_response = fgets( $socket, 22 );
-        $pos = null;
-	    $pos = strpos($http_response, "200 OK");
-        if ( !empty($pos) ) {
-            fclose( $socket );
-            return(true);
-        } else {
-        	//echo "HTTP-Response: $http_response<br>";
-            return(false);
-        }
-    }
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    return $http_code == 200;
 }
