@@ -59,6 +59,7 @@ function Bupdate($table, $data, $conditions) {
     $stmt = CONN->prepare($query);
     return $stmt->execute(array_merge($data, $conditions));
 }
+//herdadas v3
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
 }
