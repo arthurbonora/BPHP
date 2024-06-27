@@ -39,13 +39,8 @@
     
     <div class="section">
         <h2>Conexão com o Banco de Dados</h2>
-        <p>Antes de utilizar as funções, é necessário estabelecer uma conexão com o banco de dados. A conexão é definida como uma constante <code>CONN</code>.</p>
-        <pre><code>require 'config.php';
-$connection = new mysqli($host, $usuario, $senha, $banco);
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
-define('CONN', $connection);</code></pre>
+        <p>Antes de utilizar as funções, é necessário estabelecer uma conexão com o banco de dados.</p>
+        <p>Insira os dados de conexão no arquivo src/config.php</p>        
     </div>
     
     <div class="section">
@@ -271,7 +266,6 @@ Bdelete('clientes', $conditions);</code></pre>
     </div>
     
     <div class="section">
-        <h2>Conclusão</h2>
         <p>Esta documentação cobre as funções essenciais da biblioteca BPHP. Use os exemplos fornecidos para integrar as funções em seus projetos e consulte esta documentação conforme necessário. Se houver dúvidas ou problemas, consulte a fonte oficial ou entre em contato com o desenvolvedor responsável.</p>
     </div>
 </body>
