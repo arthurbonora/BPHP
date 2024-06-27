@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação BPHP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Documentação BPHP</h1>
+    
+    <div class="section">
+        <h2>Introdução</h2>
+        <p>BPHP 4 é uma biblioteca PHP que fornece um conjunto de funções úteis para operações comuns de banco de dados e outras utilidades. Esta documentação explica como utilizar cada função da biblioteca.</p>
+    </div>
+    
+    <div class="section">
+        <h2>Conexão com o Banco de Dados</h2>
+        <p>Antes de utilizar as funções, é necessário estabelecer uma conexão com o banco de dados. A conexão é definida como uma constante <code>CONN</code>.</p>
+        <pre><code>require 'config.php';
+$connection = new mysqli($host, $usuario, $senha, $banco);
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+define('CONN', $connection);</code></pre>
+    </div>
+    
+    <div class="section">
+        <h2>Funções de Debug</h2>
+        <h3>Bdebug</h3>
+        <p>Imprime o conteúdo de uma variável em um formato legível.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$data</code> (mixed): A variável a ser impressa.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$data = ['nome' => 'João', 'idade' => 25];
+Bdebug($data);</code></pre>
+    </div>
+    
+    <div class="section">
+        <h2>Funções CRUD</h2>
+        <h3>Binsert</h3>
+        <p>Insere dados em uma tabela.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$table</code> (string): O nome da tabela.</li>
+            <li><code>$data</code> (array): Um array associativo com os dados a serem inseridos (<code>coluna => valor</code>).</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$data = ['nome' => 'João', 'idade' => 25];
+Binsert('clientes', $data);</code></pre>
+        
+        <h3>Bselect</h3>
+        <p>Seleciona dados de uma tabela.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$table</code> (string): O nome da tabela.</li>
+            <li><code>$conditions</code> (array, opcional): Um array associativo com as condições (<code>coluna => valor</code>).</li>
+            <li><code>$columns</code> (array, opcional): Um array com os nomes das colunas a serem selecionadas (padrão: <code>['*']</code>).</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>// Seleciona todos os dados
+$data = Bselect('clientes');
+
+// Seleciona dados com condições
+$data = Bselect('clientes', ['id' => 1], ['nome', 'idade']);</code></pre>
+        
+        <h3>Bupdate</h3>
+        <p>Atualiza dados em uma tabela.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$table</code> (string): O nome da tabela.</li>
+            <li><code>$data</code> (array): Um array associativo com os dados a serem atualizados (<code>coluna => valor</code>).</li>
+            <li><code>$conditions</code> (array): Um array associativo com as condições (<code>coluna => valor</code>).</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$data = ['idade' => 26];
+$conditions = ['id' => 1];
+Bupdate('clientes', $data, $conditions);</code></pre>
+        
+        <h3>Bdelete</h3>
+        <p>Deleta dados de uma tabela.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$table</code> (string): O nome da tabela.</li>
+            <li><code>$conditions</code> (array): Um array associativo com as condições (<code>coluna => valor</code>).</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$conditions = ['id' => 1];
+Bdelete('clientes', $conditions);</code></pre>
+        <p><strong>Nota:</strong> Esta função retorna uma mensagem de erro se nenhuma condição for especificada, para evitar exclusões indesejadas.</p>
+    </div>
+    
+    <div class="section">
+        <h2>Outras Funções</h2>
+        <h3>Balerta</h3>
+        <p>Exibe uma mensagem de alerta em JavaScript.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$msg</code> (string): A mensagem a ser exibida.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>Balerta('Operação realizada com sucesso!');</code></pre>
+        
+        <h3>Bconfirm</h3>
+        <p>Exibe uma mensagem de confirmação em JavaScript.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$msg</code> (string): A mensagem a ser exibida.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>Bconfirm('Tem certeza que deseja continuar?');</code></pre>
+        
+        <h3>Bcontdiasuteis</h3>
+        <p>Calcula a quantidade de dias úteis entre duas datas.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$timestampInicial</code> (int): Timestamp da data inicial.</li>
+            <li><code>$timestampFinal</code> (int, opcional): Timestamp da data final (padrão: <code>time()</code>).</li>
+            <li><code>$feriados</code> (array, opcional): Array de timestamps dos feriados.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$uteis = Bcontdiasuteis(strtotime('2023-01-01'), strtotime('2023-01-31'));</code></pre>
+        
+        <h3>Bdatabr2datamysql</h3>
+        <p>Converte uma data no formato brasileiro (dd/mm/aaaa) para o formato MySQL (aaaa-mm-dd).</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$databr</code> (string): A data no formato brasileiro.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$data_mysql = Bdatabr2datamysql('31/12/2023');</code></pre>
+        
+        <h3>Beditor</h3>
+        <p>Inicializa o editor TinyMCE para um textarea com o ID <code>beditor</code>.</p>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>Beditor();</code></pre>
+        
+        <h3>Bgeracodbarras</h3>
+        <p>Gera um código de barras a partir de uma string.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$string</code> (string): A string a ser convertida em código de barras.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>Bgeracodbarras('1234567890');</code></pre>
+        
+        <h3>Bhash</h3>
+        <p>Gera um hash SHA-1 duplo seguido de MD5 de uma string.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$string</code> (string): A string a ser hasheada.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$hash = Bhash('minhasenha');</code></pre>
+        
+        <h3>Blinkvoltar</h3>
+        <p>Salva o histórico de navegação em sessões para possibilitar navegação de volta.</p>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>Blinkvoltar();</code></pre>
+        
+        <h3>Bmostraerros</h3>
+        <p>Ativa a exibição de erros no PHP.</p>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>Bmostraerros();</code></pre>
+        
+        <h3>Bpeganumeros</h3>
+        <p>Extrai apenas os números de uma string.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$str</code> (string): A string a ser processada.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$numeros = Bpeganumeros('Rua 123, Nº 456');</code></pre>
+        
+        <h3>Brand</h3>
+        <p>Retorna um item aleatório de uma lista de cinco itens.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$item1</code> (mixed): Primeiro item.</li>
+            <li><code>$item2</code> (mixed): Segundo item.</li>
+            <li><code>$item3</code> (mixed): Terceiro item.</li>
+            <li><code>$item4</code> (mixed): Quarto item.</li>
+            <li><code>$item5</code> (mixed): Quinto item.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$aleatorio = Brand('a', 'b', 'c', 'd', 'e');</code></pre>
+        
+        <h3>Bredirecionamentojs</h3>
+        <p>Redireciona para uma URL usando JavaScript.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$link</code> (string|int): A URL para redirecionar ou <code>-1</code> para voltar.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>Bredirecionamentojs('http://www.exemplo.com');</code></pre>
+        
+        <h3>Bseg</h3>
+        <p>Sanitiza uma string para evitar caracteres especiais.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$string</code> (string): A string a ser sanitizada.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$seguro = Bseg("string; com 'caracteres' especiais");</code></pre>
+        
+        <h3>Bsetpreco</h3>
+        <p>Converte vírgulas em pontos em uma string de preço.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$valor</code> (string): O valor a ser convertido.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$preco = Bsetpreco('1,99');</code></pre>
+        
+        <h3>Btoken</h3>
+        <p>Gera um token aleatório.</p>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$token = Btoken();</code></pre>
+        
+        <h3>Bvalidacnpj</h3>
+        <p>Valida um CNPJ.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$cnpj</code> (string): O CNPJ a ser validado.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$valido = Bvalidacnpj('12345678000195');</code></pre>
+        
+        <h3>Bvalidacpf</h3>
+        <p>Valida um CPF.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$cpf</code> (string): O CPF a ser validado.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$valido = Bvalidacpf('12345678909');</code></pre>
+        
+        <h3>Bverificaurl</h3>
+        <p>Verifica se uma URL é válida e está acessível.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$link</code> (string): A URL a ser verificada.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$valido = Bverificaurl('http://www.exemplo.com');</code></pre>
+    </div>
+    
+    <div class="section">
+        <h2>Conclusão</h2>
+        <p>Esta documentação cobre as funções essenciais da biblioteca BPHP. Use os exemplos fornecidos para integrar as funções em seus projetos e consulte esta documentação conforme necessário. Se houver dúvidas ou problemas, consulte a fonte oficial ou entre em contato com o desenvolvedor responsável.</p>
+    </div>
+</body>
+</html>
