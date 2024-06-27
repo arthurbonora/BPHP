@@ -11,7 +11,7 @@ if ($connection->connect_error) {
 define('CONN', $connection);
 function Bdebug($data) {
     echo '<pre>';
-    var_dump($data);
+    print_r($data);
     echo '</pre>';
 }
 function Bdelete($table, $conditions) {
@@ -81,6 +81,7 @@ function Bupdate($table, $data, $conditions) {
     $stmt->bind_param(str_repeat('s', count($data) + count($conditions)), ...array_merge(array_values($data), array_values($conditions)));
     return $stmt->execute();
 }
+
 //herdadas v3
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
