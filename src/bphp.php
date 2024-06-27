@@ -3,7 +3,7 @@
    BPHP 4 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
 ========================================================================*/
-require '../config.php';
+require 'config.php';
 $connection = new mysqli($host, $usuario, $senha, $banco);
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
@@ -17,47 +17,69 @@ function Bdebug($data) {
 function Bdelete($table, $conditions) {
     $conditionList = [];
     foreach ($conditions as $column => $value) {
-    $conditionList[] = "$column = :$column";    }
+        $conditionList[] = "$column = ?";
+    }
     $conditionClause = implode(" AND ", $conditionList);
     $query = "DELETE FROM $table WHERE $conditionClause";
     $stmt = CONN->prepare($query);
-    return $stmt->execute($conditions);
+    if ($stmt === false) {
+        return false;
+    }
+    $stmt->bind_param(str_repeat('s', count($conditions)), ...array_values($conditions));
+    return $stmt->execute();
 }
+
 function Binsert($table, $data) {
     $columns = implode(", ", array_keys($data));
-    $placeholders = ":" . implode(", :", array_keys($data));
+    $placeholders = implode(", ", array_fill(0, count($data), '?'));
     $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
     $stmt = CONN->prepare($query);
-    return $stmt->execute($data);
+    if ($stmt === false) {
+        return false;
+    }
+    $stmt->bind_param(str_repeat('s', count($data)), ...array_values($data));
+    return $stmt->execute();
 }
+
 function Bselect($table, $conditions = [], $columns = ['*']) {
     $columnsList = implode(", ", $columns);
     $query = "SELECT $columnsList FROM $table";
     if (!empty($conditions)) {
         $conditionList = [];
         foreach ($conditions as $column => $value) {
-            $conditionList[] = "$column = :$column";
+            $conditionList[] = "$column = ?";
         }
         $query .= " WHERE " . implode(" AND ", $conditionList);
     }
     $stmt = CONN->prepare($query);
-    $stmt->execute($conditions);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($stmt === false) {
+        return false;
+    }
+    if (!empty($conditions)) {
+        $stmt->bind_param(str_repeat('s', count($conditions)), ...array_values($conditions));
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
 }
 function Bupdate($table, $data, $conditions) {
     $setList = [];
     foreach ($data as $column => $value) {
-        $setList[] = "$column = :$column";
+        $setList[] = "$column = ?";
     }
     $setClause = implode(", ", $setList);
     $conditionList = [];
     foreach ($conditions as $column => $value) {
-        $conditionList[] = "$column = :$column";
+        $conditionList[] = "$column = ?";
     }
     $conditionClause = implode(" AND ", $conditionList);
     $query = "UPDATE $table SET $setClause WHERE $conditionClause";
     $stmt = CONN->prepare($query);
-    return $stmt->execute(array_merge($data, $conditions));
+    if ($stmt === false) {
+        return false;
+    }
+    $stmt->bind_param(str_repeat('s', count($data) + count($conditions)), ...array_merge(array_values($data), array_values($conditions)));
+    return $stmt->execute();
 }
 //herdadas v3
 function Balerta ($msg) {
