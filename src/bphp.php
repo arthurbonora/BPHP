@@ -173,6 +173,17 @@ function Bmostraerros () {
 	ini_set("display_startup_erros",1);
 	error_reporting(E_ALL);
 }
+function Bprocpalavras($frase, $palavras, $resultado = 0)
+{
+    foreach ($palavras as $key => $value) {
+        $pos = strpos($frase, $value);
+        if ($pos !== false) {
+            $resultado = 1;
+            break;
+        }
+    }
+    return $resultado;
+}
 function Bpeganumeros($str) {
         return preg_replace("/[^0-9]/", "", $str);
 }

@@ -181,6 +181,27 @@ Bdelete('clientes', $conditions);</code></pre>
         <p>Ativa a exibição de erros no PHP.</p>
         <p><strong>Exemplo de Uso:</strong></p>
         <pre><code>Bmostraerros();</code></pre>
+
+        <h3>Bprocpalavras</h3>
+        <p>Procura palavras específicas dentro de uma frase e retorna um resultado com base na presença dessas palavras.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$frase</code> (string): A frase onde as palavras serão procuradas.</li>
+            <li><code>$palavras</code> (array): Um array de palavras a serem procuradas na frase.</li>
+            <li><code>$resultado</code> (int, opcional): O valor padrão a ser retornado se nenhuma palavra for encontrada (padrão: <code>0</code>).</li>
+        </ul>
+        <p><strong>Retorno:</strong></p>
+        <ul>
+            <li>(int): Retorna <code>1</code> se pelo menos uma das palavras for encontrada na frase, caso contrário, retorna o valor do parâmetro <code>$resultado</code> (padrão: <code>0</code>).</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>$frase = "Esta é uma frase de exemplo.";
+        $palavras = ["exemplo", "teste"];
+        $resultado = Bprocpalavras($frase, $palavras);
+        echo $resultado;  // Saída: 1</code></pre>
+           
+        
+
         
         <h3>Bpeganumeros</h3>
         <p>Extrai apenas os números de uma string.</p>
