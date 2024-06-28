@@ -69,6 +69,7 @@ v 4     - Inserido o sistema CRUD para interação com Mysql / MariaDB
 	- Atualizada função BvalidaCPF
 	- Atualizada função Bcontdiasuteis
 	- Retirado a função Bdataporextenso
+	- Alterado a documentação para arquivo html
 
 
  
