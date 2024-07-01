@@ -117,7 +117,30 @@ Bupdate('clientes', $data, $conditions);</code></pre>
         <p><strong>Exemplo de Uso:</strong></p>
         <pre><code>$conditions = ['id' => 1];
 Bdelete('clientes', $conditions);</code></pre>
+    </div>  
+
+    <div class="section">
+        <h3>Bquery</h3>
+        <p>Executa uma query SQL completa e retorna os resultados.</p>
+        <p><strong>Parâmetros:</strong></p>
+        <ul>
+            <li><code>$sql</code> (string): A query SQL completa a ser executada.</li>
+        </ul>
+        <p><strong>Retorno:</strong></p>
+        <ul>
+            <li>(array): Um array associativo com os resultados da query.</li>
+        </ul>
+        <p><strong>Exemplo de Uso:</strong></p>
+        <pre><code>// Executa uma query selecionando todos os dados
+    $data = Bquery("SELECT * FROM clientes");
+    Bdebug($data);
+    
+    // Executa uma query com condições
+    $data = Bquery("SELECT id, nome FROM clientes WHERE status = 'ativo' ORDER BY nome ASC");
+    Bdebug($data);
+    </code></pre>
     </div>
+    
     
     <div class="section">
         <h2>Outras Funções</h2>

@@ -87,6 +87,17 @@ function Bupdate($table, $data, $conditions) {
     return $stmt->execute();
 }
 
+function Bquery($sql) {
+    $stmt = CONN->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+
 //herdadas v3
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
