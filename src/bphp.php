@@ -41,15 +41,19 @@ function Binsert($table, $data) {
     return $stmt->execute();
 }
 
-function Bselect($table, $conditions = [], $columns = ['*']) {
+function Bselect($table, $conditions = [], $columns = ['*'], $orderBy = '') {
     $columnsList = implode(", ", $columns);
-    $query = "SELECT $columnsList FROM $table";
+    $query = "SELECT $columnsList FROM $table";    
     if (!empty($conditions)) {
         $conditionList = [];
         foreach ($conditions as $column => $value) {
             $conditionList[] = "$column = ?";
         }
         $query .= " WHERE " . implode(" AND ", $conditionList);
+    }
+    // Adiciona a cláusula ORDER BY, se especificada
+    if (!empty($orderBy)) {
+        $query .= " ORDER BY $orderBy";
     }
     $stmt = CONN->prepare($query);
     if ($stmt === false) {
@@ -62,6 +66,7 @@ function Bselect($table, $conditions = [], $columns = ['*']) {
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
 function Bupdate($table, $data, $conditions) {
     $setList = [];
     foreach ($data as $column => $value) {
