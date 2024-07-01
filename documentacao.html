@@ -69,20 +69,30 @@ Bdebug($data);</code></pre>
         <pre><code>$data = ['nome' => 'João', 'idade' => 25];
 Binsert('clientes', $data);</code></pre>
         
-        <h3>Bselect</h3>
-        <p>Seleciona dados de uma tabela.</p>
-        <p><strong>Parâmetros:</strong></p>
-        <ul>
-            <li><code>$table</code> (string): O nome da tabela.</li>
-            <li><code>$conditions</code> (array, opcional): Um array associativo com as condições (<code>coluna => valor</code>).</li>
-            <li><code>$columns</code> (array, opcional): Um array com os nomes das colunas a serem selecionadas (padrão: <code>['*']</code>).</li>
-        </ul>
-        <p><strong>Exemplo de Uso:</strong></p>
-        <pre><code>// Seleciona todos os dados
+<div class="section">
+    <h3>Bselect</h3>
+    <p>Seleciona dados de uma tabela com suporte para condições e ordenação opcional.</p>
+    <p><strong>Parâmetros:</strong></p>
+    <ul>
+        <li><code>$table</code> (string): O nome da tabela.</li>
+        <li><code>$conditions</code> (array, opcional): Um array associativo com as condições (<code>coluna => valor</code>).</li>
+        <li><code>$columns</code> (array, opcional): Um array com os nomes das colunas a serem selecionadas (padrão: <code>['*']</code>).</li>
+        <li><code>$orderBy</code> (string, opcional): A coluna e a direção para ordenar os resultados (ex: <code>'nome ASC'</code>).</li>
+    </ul>
+    <p><strong>Exemplo de Uso:</strong></p>
+    <pre><code>// Seleciona todos os dados
 $data = Bselect('clientes');
 
 // Seleciona dados com condições
-$data = Bselect('clientes', ['id' => 1], ['nome', 'idade']);</code></pre>
+$data = Bselect('clientes', ['id' => 1], ['nome', 'idade']);
+
+// Seleciona dados com ordenação
+$data = Bselect('clientes', [], ['*'], 'nome ASC');
+
+// Seleciona dados com condições e ordenação
+$data = Bselect('clientes', ['status' => 'ativo'], ['id', 'nome'], 'nome DESC');</code></pre>
+</div>
+
         
         <h3>Bupdate</h3>
         <p>Atualiza dados em uma tabela.</p>
