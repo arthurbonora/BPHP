@@ -99,7 +99,6 @@ function Bquery($sql) {
     return $data;
 }
 
-
 //herdadas v3
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
