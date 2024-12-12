@@ -140,6 +140,82 @@ Bdelete('clientes', $conditions);</code></pre>
     Bdebug($data);
     </code></pre>
     </div>
+
+    <div class="section">
+        <h3>BjsonToHtml</h3>
+        <p>Converte um JSON válido em uma estrutura HTML formatada, exibindo os dados de forma organizada em listas.</p>
+    
+        <h4>Descrição</h4>
+        <p>Esta função decodifica uma string JSON em um array ou objeto PHP e gera uma representação HTML bem formatada, ideal para exibição de dados em páginas web. O HTML gerado inclui listas não ordenadas (<code>&lt;ul&gt;</code>) para estruturas hierárquicas e faz a sanitização dos dados para prevenir problemas de segurança (como ataques XSS).</p>
+    
+        <h4>Parâmetros</h4>
+        <ul>
+            <li><code>$json</code> (string): A string JSON a ser convertida em HTML.</li>
+        </ul>
+    
+        <h4>Retorno</h4>
+        <ul>
+            <li>(string): Uma string contendo a representação HTML dos dados. Se o JSON for inválido, retorna uma mensagem de erro em HTML.</li>
+        </ul>
+    
+        <h4>Exemplo de Uso</h4>
+        <pre><code>// JSON de exemplo
+    $json = '{
+        "nome": "João",
+        "idade": 30,
+        "endereço": {
+            "cidade": "São Paulo",
+            "estado": "SP"
+        },
+        "ativo": true,
+        "tags": ["PHP", "JSON", "HTML"]
+    }';
+    
+    // Converte o JSON para HTML
+    $html = BjsonToHtml($json);
+    
+    // Exibe o HTML
+    echo $html;
+    </code></pre>
+    
+        <h4>Exemplo de Saída</h4>
+        <p>Para o JSON acima, a função gerará o seguinte HTML:</p>
+        <pre><code>&lt;div style="font-family: Arial, sans-serif; line-height: 1.6;"&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;strong&gt;nome:&lt;/strong&gt; João&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;idade:&lt;/strong&gt; 30&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;endereço:&lt;/strong&gt; 
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;strong&gt;cidade:&lt;/strong&gt; São Paulo&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;estado:&lt;/strong&gt; SP&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;ativo:&lt;/strong&gt; true&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;tags:&lt;/strong&gt; 
+                &lt;ul&gt;
+                    &lt;li&gt;PHP&lt;/li&gt;
+                    &lt;li&gt;JSON&lt;/li&gt;
+                    &lt;li&gt;HTML&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    </code></pre>
+    
+        <h4>Erros Possíveis</h4>
+        <p>Se o JSON fornecido for inválido, a função retornará uma mensagem de erro no seguinte formato:</p>
+        <pre><code>&lt;p&gt;[BPHP] JSON inválido: <mensagem de erro>&lt;/p&gt;</code></pre>
+        <p>Por exemplo:</p>
+        <pre><code>&lt;p&gt;[BPHP] JSON inválido: Syntax error&lt;/p&gt;</code></pre>
+    
+        <h4>Notas de Implementação</h4>
+        <ul>
+            <li>A função utiliza <code>json_decode</code> para transformar o JSON em array associativo e verifica erros usando <code>json_last_error</code>.</li>
+            <li>Os dados são convertidos em HTML usando listas (<code>&lt;ul&gt;</code> e <code>&lt;li&gt;</code>) recursivamente, preservando a hierarquia do JSON.</li>
+            <li>Sanitização é feita com <code>htmlspecialchars</code> para evitar a injeção de código malicioso.</li>
+        </ul>
+    </div>
+    
     
     
     <div class="section">

@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 4 - Biblioteca PHP
+   BPHP 4.1 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
 ========================================================================*/
 require 'config.php';
@@ -97,6 +97,35 @@ function Bquery($sql) {
     $data = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
     return $data;
+}
+
+function BjsonToHtml(string $json): string {
+    function formatData($data): string {
+        if (is_array($data)) {
+            $html = '<ul>';
+            foreach ($data as $key => $value) {
+            $html .= '<li><strong>' . htmlspecialchars((string)$key) . ':</strong> ' . formatData($value) . '</li>';
+            }
+            $html .= '</ul>';
+            return $html;
+        } elseif (is_bool($data)) {
+            return $data ? 'true' : 'false';
+        } elseif (is_null($data)) {
+            return 'null';
+        } else {
+            return htmlspecialchars((string)$data);
+        }
+    }
+    // Decodifica o JSON para um array ou objeto.
+    $data = json_decode($json, true);
+
+    // Verifica se o JSON é válido.
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return "<p>[BPHP] JSON inválido: " . htmlspecialchars(json_last_error_msg()) . "</p>";
+    }
+
+    // Gera o HTML a partir do array.
+    return '<div style="font-family: Arial, sans-serif; line-height: 1.6;">' . formatData($data) . '</div>';
 }
 
 //herdadas v3
