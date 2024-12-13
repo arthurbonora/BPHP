@@ -70,6 +70,7 @@ v 4     - Inserido o sistema CRUD para interação com Mysql / MariaDB
 	- Atualizada função Bcontdiasuteis
 	- Retirado a função Bdataporextenso
 	- Alterado a documentação para arquivo html
+v 4.1 - Inserido função Bjsontohtml
 
 
  
