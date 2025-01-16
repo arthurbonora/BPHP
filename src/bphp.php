@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 4.1 - Biblioteca PHP
+   BPHP 4.2 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
 ========================================================================*/
 require 'config.php';
@@ -9,6 +9,11 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 define('CONN', $connection);
+$connection_read = new mysqli($host_read, $usuario_read, $senha_read, $banco_read);
+if ($connection_read->connect_error) {
+    die("Connection failed: " . $connection_read->connect_error);
+}
+define('CONN_read', $connection_read);
 function Bdebug($data) {
     echo '<pre>';
     print_r($data);
@@ -55,7 +60,7 @@ function Bselect($table, $conditions = [], $columns = ['*'], $orderBy = '') {
     if (!empty($orderBy)) {
         $query .= " ORDER BY $orderBy";
     }
-    $stmt = CONN->prepare($query);
+    $stmt = CONN_read->prepare($query);
     if ($stmt === false) {
         return false;
     }
