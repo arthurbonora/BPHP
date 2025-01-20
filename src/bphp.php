@@ -48,7 +48,7 @@ function Binsert($table, $data) {
 
 function Bselect($table, $conditions = [], $columns = ['*'], $orderBy = '') {
     $columnsList = implode(", ", $columns);
-    $query = "SELECT $columnsList FROM $table";    
+    $query = "SELECT $columnsList FROM $table";
     if (!empty($conditions)) {
         $conditionList = [];
         foreach ($conditions as $column => $value) {
@@ -186,25 +186,33 @@ function Beditor() {
 	<?php
 }
 function Bgeracodbarras ($string) {
-?>
-    <script type="text/javascript" src="bytescoutbarcode128_1.00.07.js"></script>
-    <img id="barcodeImage" style="border:0px;"/>
-	</p>
-    <script type="text/javascript">
-   	function updateBarcode() {
-		var barcode = new bytescoutbarcode128();
-		var value = <?php echo $string; ?>;
-   		barcode.valueSet(value);
-   		barcode.setMargins(5, 5, 5, 5);
-   		barcode.setBarWidth(2);
-   		var width = barcode.getMinWidth();
-   		barcode.setSize(width, 100);
-   		var barcodeImage = document.getElementById('barcodeImage');
-   		barcodeImage.src = barcode.exportToBase64(width, 100, 0);
-   	}
-    </script>
-<?php
-}
+    ?>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+            <div id="barcodeContainer" style="border:0px;"><svg id="barcode"></svg></div>
+            <script type="text/javascript">
+                function generateBarcode(value) {
+                    JsBarcode("#barcode", value, {
+                        format: "ITF", // Interleaved 2 of 5
+                        width: 1.5,
+                        height: 79,
+                        displayValue: true,
+                        font: "OCR-B",
+                        textAlign: "center",
+                        textMargin: 5,
+                        fontSize: 12,
+                        background: "#ffffff",
+                        lineColor: "#000000",
+                        margin: 10
+                    });
+                }
+
+                // Chamar a função para gerar o código de barras
+                window.onload = function() {
+                    generateBarcode(<?php echo json_encode($string); ?>);
+                };
+            </script>
+    <?php
+    }
 function Bhash($string) {
 	$hash___ = sha1($string);
 	$hash__  = sha1($hash___);
@@ -324,11 +332,11 @@ function Bverificaurl($link) {
         return false;
     }
     $ch = curl_init($link);
-    curl_setopt($ch, CURLOPT_NOBODY, true); 
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10); 
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); 
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+    curl_setopt($ch, CURLOPT_NOBODY, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($ch);
     if (curl_errno($ch)) {
         curl_close($ch);
