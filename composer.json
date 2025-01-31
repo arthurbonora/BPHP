@@ -1,14 +1,19 @@
 {
     "name": "arthurbonora/bphp",
-    "description": "Biblioteca de funções BPHP",
+    "description": "Uma biblioteca PHP para operações de banco de dados e utilidades.",
     "type": "library",
-    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bphp\\": "src/"
+        }
+    },
     "authors": [
         {
-            "name": "Arthur Bonora - Bonora Soluções Web",
+            "name": "Arthur Bonora",
             "email": "arthur@bonora.com.br"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "php": ">=8.0"
+    }
 }
