@@ -215,6 +215,75 @@ Bdelete('clientes', $conditions);</code></pre>
             <li>Sanitização é feita com <code>htmlspecialchars</code> para evitar a injeção de código malicioso.</li>
         </ul>
     </div>
+
+    <div class="section">
+  <h2>Funções de Segurança</h2>
+
+  <h3>Bvalidasenha</h3>
+  <p>
+    Valida senhas conforme uma política forte compatível com boas práticas de segurança
+    (<em>8–36 caracteres, sem espaços, mínimo de 3 classes entre minúsculas/MAIÚSCULAS/números/símbolos, sem
+    repetições exageradas, sem sequências óbvias e sem palavras comuns/termos proibidos</em>).
+  </p>
+
+  <h4>Assinatura</h4>
+  <pre><code>Bvalidasenha(string $senha, array $blacklist = [], bool $verbose = true): array</code></pre>
+
+  <h4>Parâmetros</h4>
+  <ul>
+    <li><code>$senha</code> (string): Senha a validar.</li>
+    <li><code>$blacklist</code> (array, opcional): Palavras/termos proibidos (ex.: nome do usuário, empresa, e-mail, domínio).</li>
+    <li><code>$verbose</code> (bool, opcional; padrão: <code>true</code>): Se <code>false</code>, retorna mensagens genéricas (recomendado em <em>login</em>).</li>
+  </ul>
+
+  <h4>Retorno</h4>
+  <ul>
+    <li>(array): Sempre retorna um array com as chaves:
+      <ul>
+        <li><code>ok</code> (bool): <code>true</code> se a senha atende às regras; <code>false</code> caso contrário.</li>
+        <li><code>motivo</code> (string, somente em caso de erro): Motivo resumido da reprovação (ou “Senha inválida.” se <code>$verbose=false</code>).</li>
+        <li><code>explicacao</code> (string, somente em caso de erro): Resumo das regras aceitas.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Política de validação</h4>
+  <ul>
+    <li>Comprimento entre <strong>8</strong> e <strong>36</strong> caracteres (conta caracteres, não bytes).</li>
+    <li><strong>Sem espaços</strong>.</li>
+    <li>Pelo menos <strong>3 das 4 classes</strong>: minúscula, MAIÚSCULA, número, símbolo.</li>
+    <li>Sem repetição do mesmo caractere <strong>3+</strong> vezes consecutivas.</li>
+    <li>Sem sequências simples de letras ou dígitos (ex.: <code>1234</code>, <code>abcd</code>, <code>zyxw</code>).</li>
+    <li>Bloqueia palavras comuns (ex.: <code>senha</code>, <code>password</code>, <code>admin</code>, etc.) e termos da <code>$blacklist</code>.</li>
+  </ul>
+
+  <h4>Exemplos de uso</h4>
+  <pre><code>// 1) Cadastro (mostrar motivo de reprovação)
+$res = Bvalidasenha('R9m!c7Px$z4L');
+if (!$res['ok']) {
+    echo "Senha inválida: {$res['motivo']}\nComo deve ser: {$res['explicacao']}";
+}
+
+// 2) Cadastro com blacklist (nome do usuário/empresa)
+$res = Bvalidasenha('MinhaEmpresa2025!', ['minhaempresa', 'arthur', 'julio andó']);
+if (!$res['ok']) {
+    // Exibe o motivo detalhado
+}
+
+// 3) Login (mensagem genérica para não dar pista a atacante)
+$res = Bvalidasenha($_POST['password'] ?? '', [], false);
+if (!$res['ok']) {
+    echo "Usuário ou senha inválidos."; // não revela regra específica
+}
+</code></pre>
+
+  <h4>Notas</h4>
+  <ul>
+    <li>Compatível com Unicode: conta acentos/emoji corretamente (usa <code>mb_*</code> se disponível).</li>
+    <li>Normaliza acentos quando a extensão <code>intl</code> estiver presente (<code>Normalizer::FORM_C</code>).</li>
+    <li>As checagens de sequência focam em letras/dígitos ASCII para evitar falsos positivos em alfabetos variados.</li>
+  </ul>
+</div>
     
     
     

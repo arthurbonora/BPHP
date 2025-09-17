@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   BPHP 4.2 - Biblioteca PHP
+   BPHP 4.3 - Biblioteca PHP
    Site oficial: https://github.com/arthurbonora/BPHP/
 ========================================================================*/
 require 'config.php';
@@ -14,6 +14,90 @@ if ($connection_read->connect_error) {
     die("Connection failed: " . $connection_read->connect_error);
 }
 define('CONN_read', $connection_read);
+
+//v4.3
+function Bvalidasenha(string $senha, array $blacklist = []): array {
+    $explicacao = 'A senha deve ter 8 a 36 caracteres, sem espaços, conter ao menos 3 das 4 classes (minúscula, MAIÚSCULA, número, símbolo), '
+                . 'não repetir o mesmo caractere 3+ vezes seguidas, não conter sequências óbvias (ex.: 1234, abcd, zyxw) '
+                . 'e evitar palavras comuns ou termos do seu contexto (ex.: nome da empresa/usuário).';
+
+    // 1) Tamanho
+    $len = strlen($senha);
+    if ($len < 8)  return ['ok' => false, 'motivo' => 'Senha muito curta (mínimo 8).',  'explicacao' => $explicacao];
+    if ($len > 36) return ['ok' => false, 'motivo' => 'Senha muito longa (máximo 36).', 'explicacao' => $explicacao];
+
+    // 2) Espaços
+    if (preg_match('/\s/', $senha)) {
+        return ['ok' => false, 'motivo' => 'A senha não pode conter espaços.', 'explicacao' => $explicacao];
+    }
+
+    // 3) Força mínima: 3 de 4 classes
+    $classes = 0;
+    $classes += (int) preg_match('/[a-z]/', $senha);          // minúscula
+    $classes += (int) preg_match('/[A-Z]/', $senha);          // MAIÚSCULA
+    $classes += (int) preg_match('/\d/', $senha);             // número
+    $classes += (int) preg_match('/[^a-zA-Z\d]/', $senha);    // símbolo
+    if ($classes < 3) {
+        return ['ok' => false, 'motivo' => 'Use ao menos 3 das 4 classes: minúscula, MAIÚSCULA, número e símbolo.', 'explicacao' => $explicacao];
+    }
+    // 4) Repetições (aaa, 1111, !!! etc.)
+    if (preg_match('/(.)\1{2,}/', $senha)) {
+        return ['ok' => false, 'motivo' => 'Evite repetir o mesmo caractere 3 ou mais vezes seguidas.', 'explicacao' => $explicacao];
+    }
+    // 5) Sequências (abcd, 1234, zyxw) — verifica em letras e dígitos
+    $minSeq = 4;
+    // Letras
+    $letters = strtolower(preg_replace('/[^a-z]/i', '', $senha));
+    $n = strlen($letters);
+    $temSequencia = false;
+    if ($n >= $minSeq) {
+        for ($i = 0; $i <= $n - $minSeq && !$temSequencia; $i++) {
+            $asc = true; $desc = true;
+            for ($j = 0; $j < $minSeq - 1; $j++) {
+                $diff = ord($letters[$i + $j + 1]) - ord($letters[$i + $j]);
+                if ($diff !== 1)  $asc  = false;
+                if ($diff !== -1) $desc = false;
+                if (!$asc && !$desc) break;
+            }
+            if ($asc || $desc) $temSequencia = true;
+        }
+    }
+    // Dígitos (se ainda não achou)
+    if (!$temSequencia) {
+        $digits = preg_replace('/\D/', '', $senha);
+        $n = strlen($digits);
+        if ($n >= $minSeq) {
+            for ($i = 0; $i <= $n - $minSeq && !$temSequencia; $i++) {
+                $asc = true; $desc = true;
+                for ($j = 0; $j < $minSeq - 1; $j++) {
+                    $diff = ord($digits[$i + $j + 1]) - ord($digits[$i + $j]);
+                    if ($diff !== 1)  $asc  = false;
+                    if ($diff !== -1) $desc = false;
+                    if (!$asc && !$desc) break;
+                }
+                if ($asc || $desc) $temSequencia = true;
+            }
+        }
+    }
+    if ($temSequencia) {
+        return ['ok' => false, 'motivo' => 'Evite sequências óbvias como 1234, abcd ou zyxw.', 'explicacao' => $explicacao];
+    }
+    // 6) Palavras comuns + blacklist customizada
+    $comuns = [
+        'password','senha','admin','qwerty','abc','abcd','abcde','teste',
+        '1234','12345','123456','123456789','0000','1111','2024','2025'
+    ];
+    $lista = array_map('strval', array_merge($comuns, $blacklist));
+    $senhaLower = mb_strtolower($senha, 'UTF-8');
+    foreach ($lista as $p) {
+        $p = trim((string) $p);
+        if ($p !== '' && mb_strpos($senhaLower, mb_strtolower($p, 'UTF-8')) !== false) {
+            return ['ok' => false, 'motivo' => "Evite palavras comuns ou termos proibidos (encontrado: \"$p\").", 'explicacao' => $explicacao];
+        }
+    }
+    return ['ok' => true];
+}
+// ---
 function Bdebug($data) {
     echo '<pre>';
     print_r($data);
