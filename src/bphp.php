@@ -33,7 +33,6 @@ function Bdelete($table, $conditions) {
     $stmt->bind_param(str_repeat('s', count($conditions)), ...array_values($conditions));
     return $stmt->execute();
 }
-
 function Binsert($table, $data) {
     $columns = implode(", ", array_keys($data));
     $placeholders = implode(", ", array_fill(0, count($data), '?'));
@@ -45,7 +44,6 @@ function Binsert($table, $data) {
     $stmt->bind_param(str_repeat('s', count($data)), ...array_values($data));
     return $stmt->execute();
 }
-
 function Bselect($table, $conditions = [], $columns = ['*'], $orderBy = '') {
     $columnsList = implode(", ", $columns);
     $query = "SELECT $columnsList FROM $table";
@@ -71,7 +69,6 @@ function Bselect($table, $conditions = [], $columns = ['*'], $orderBy = '') {
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
 }
-
 function Bupdate($table, $data, $conditions) {
     $setList = [];
     foreach ($data as $column => $value) {
@@ -91,7 +88,6 @@ function Bupdate($table, $data, $conditions) {
     $stmt->bind_param(str_repeat('s', count($data) + count($conditions)), ...array_merge(array_values($data), array_values($conditions)));
     return $stmt->execute();
 }
-
 function Bquery($sql) {
     $stmt = CONN->prepare($sql);
     if ($stmt === false) {
@@ -103,7 +99,6 @@ function Bquery($sql) {
     $stmt->close();
     return $data;
 }
-
 function BjsonToHtml(string $json): string {
     function formatData($data): string {
         if (is_array($data)) {
@@ -132,7 +127,6 @@ function BjsonToHtml(string $json): string {
     // Gera o HTML a partir do array.
     return '<div style="font-family: Arial, sans-serif; line-height: 1.6;">' . formatData($data) . '</div>';
 }
-
 //herdadas v3
 function Balerta ($msg) {
 	?> <script language="javascript"> alert ('<? echo "$msg"; ?>') </script> <?
